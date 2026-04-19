@@ -1,0 +1,154 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+  color: #1a1a1a;
+}
+
+.page__header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.page__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.page__intro {
+  margin: 0;
+  color: #3d3d3d;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.page__nav {
+  margin: 0.75rem 0 0;
+}
+
+.page__link {
+  color: #1565c0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page__link:focus-visible {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+.status {
+  margin: 1rem 0;
+  text-align: center;
+  color: #3d3d3d;
+}
+
+.alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c62828;
+  border-radius: 6px;
+  background: #ffebee;
+  color: #6a1b1b;
+}
+
+.alert__action {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #6a1b1b;
+  border-radius: 4px;
+  background: #fff;
+  color: #6a1b1b;
+  font: inherit;
+  cursor: pointer;
+}
+
+.alert__action:focus-visible {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.table thead th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #222;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.empty {
+  text-align: center;
+  color: #555;
+  padding: 1.25rem;
+}
+
+.muted {
+  color: #757575;
+}
+
+.btn-cancel {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #b71c1c;
+  border-radius: 4px;
+  background: #c62828;
+  color: #fff;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: #b71c1c;
+}
+
+.btn-cancel:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-cancel:focus-visible {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

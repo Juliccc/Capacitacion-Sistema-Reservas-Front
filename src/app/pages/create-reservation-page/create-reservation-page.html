@@ -1,0 +1,154 @@
+<app-error-toast
+  [message]="toastError()"
+  (dismissed)="onToastDismissed()"
+/>
+
+<div class="page">
+  <header class="page__header">
+    <h1 class="page__title">Nueva reserva</h1>
+    <p class="page__intro">
+      Completa todos los campos para solicitar un servicio de soporte técnico.
+    </p>
+  </header>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+    <div class="field">
+      <label class="field__label" for="nombreCliente">Nombre del cliente</label>
+      <input
+        id="nombreCliente"
+        class="field__input"
+        type="text"
+        formControlName="nombreCliente"
+        autocomplete="name"
+        [class.field__input--invalid]="
+          form.controls.nombreCliente.invalid &&
+          form.controls.nombreCliente.touched
+        "
+        aria-required="true"
+        [attr.aria-invalid]="
+          form.controls.nombreCliente.invalid &&
+          form.controls.nombreCliente.touched
+        "
+        [attr.aria-describedby]="
+          form.controls.nombreCliente.invalid &&
+          form.controls.nombreCliente.touched
+            ? 'nombreCliente-error'
+            : null
+        "
+      />
+      @if (
+        form.controls.nombreCliente.touched &&
+        form.controls.nombreCliente.hasError('required')
+      ) {
+        <span id="nombreCliente-error" class="field__error" role="alert">
+          Este campo es obligatorio.
+        </span>
+      }
+    </div>
+
+    <div class="field field--inline">
+      <div class="field">
+        <label class="field__label" for="fecha">Fecha</label>
+        <input
+          id="fecha"
+          class="field__input"
+          type="date"
+          formControlName="fecha"
+          [class.field__input--invalid]="
+            form.controls.fecha.invalid && form.controls.fecha.touched
+          "
+          aria-required="true"
+          [attr.aria-invalid]="
+            form.controls.fecha.invalid && form.controls.fecha.touched
+          "
+          [attr.aria-describedby]="
+            form.controls.fecha.invalid && form.controls.fecha.touched
+              ? 'fecha-error'
+              : null
+          "
+        />
+        @if (form.controls.fecha.touched && form.controls.fecha.hasError('required')) {
+          <span id="fecha-error" class="field__error" role="alert">
+            Este campo es obligatorio.
+          </span>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="hora">Hora</label>
+        <input
+          id="hora"
+          class="field__input"
+          type="time"
+          formControlName="hora"
+          [class.field__input--invalid]="
+            form.controls.hora.invalid && form.controls.hora.touched
+          "
+          aria-required="true"
+          [attr.aria-invalid]="
+            form.controls.hora.invalid && form.controls.hora.touched
+          "
+          [attr.aria-describedby]="
+            form.controls.hora.invalid && form.controls.hora.touched
+              ? 'hora-error'
+              : null
+          "
+        />
+        @if (form.controls.hora.touched && form.controls.hora.hasError('required')) {
+          <span id="hora-error" class="field__error" role="alert">
+            Este campo es obligatorio.
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="servicio">Servicio</label>
+      <select
+        id="servicio"
+        class="field__input"
+        formControlName="servicio"
+        [class.field__input--invalid]="
+          form.controls.servicio.invalid && form.controls.servicio.touched
+        "
+        aria-required="true"
+        [attr.aria-invalid]="
+          form.controls.servicio.invalid && form.controls.servicio.touched
+        "
+        [attr.aria-describedby]="
+          form.controls.servicio.invalid && form.controls.servicio.touched
+            ? 'servicio-error'
+            : null
+        "
+      >
+        <option value="" disabled>Selecciona un servicio</option>
+        @for (opt of servicios; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (
+        form.controls.servicio.touched &&
+        form.controls.servicio.hasError('required')
+      ) {
+        <span id="servicio-error" class="field__error" role="alert">
+          Debes elegir un servicio.
+        </span>
+      }
+    </div>
+
+    <div class="actions">
+      <a routerLink="/reservas" class="actions__link">Volver al listado</a>
+      <button
+        type="submit"
+        class="actions__submit"
+        [disabled]="guardando()"
+      >
+        @if (guardando()) {
+          Guardando…
+        } @else {
+          Crear reserva
+        }
+      </button>
+    </div>
+  </form>
+</div>

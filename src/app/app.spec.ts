@@ -1,10 +1,26 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+
 import { App } from './app';
+import { routes } from './app.routes';
+import { ReservationService } from './services/reservation.service';
 
 describe('App', () => {
+  const reservationServiceMock = {
+    obtenerTodas: () => of([]),
+    crear: () => of({}),
+    cancelar: () => of(undefined),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        provideRouter(routes),
+        { provide: ReservationService, useValue: reservationServiceMock },
+      ],
     }).compileComponents();
   });
 
@@ -14,10 +30,21 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render a router outlet', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, reservation-frontend');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  });
+
+  it('should show the reservations title after navigation', async () => {
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+    await router.navigateByUrl('/reservas');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Reservas');
   });
 });

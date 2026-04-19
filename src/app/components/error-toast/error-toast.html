@@ -1,0 +1,13 @@
+@if (message(); as texto) {
+  <div class="toast" role="alert" aria-live="assertive">
+    <span class="toast__text">{{ texto }}</span>
+    <button
+      type="button"
+      class="toast__close"
+      (click)="cerrar()"
+      aria-label="Cerrar mensaje de error"
+    >
+      ×
+    </button>
+  </div>
+}
