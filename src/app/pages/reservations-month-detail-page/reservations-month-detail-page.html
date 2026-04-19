@@ -1,8 +1,13 @@
 <div class="page">
   <header class="page__header">
-    <h1 class="page__title">Reservas</h1>
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a routerLink="/reservas" class="breadcrumb__link">Meses</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current">{{ etiquetaPeriodo() }}</span>
+    </nav>
+    <h1 class="page__title">Reservas de {{ etiquetaPeriodo() }}</h1>
     <p class="page__intro">
-      Consulta el listado y cancela reservas que sigan activas.
+      Listado de reservas de este mes. Podés cancelar las que sigan activas.
     </p>
     <p class="page__nav">
       <a routerLink="/reservas/nueva" class="page__cta">Nueva reserva</a>
@@ -27,8 +32,8 @@
     <div class="table-wrap" role="region" aria-labelledby="reservas-caption">
       <table class="table">
         <caption id="reservas-caption" class="visually-hidden">
-          Listado de reservas con cliente, fecha, hora, servicio, estado y acción
-          para cancelar.
+          Reservas de {{ etiquetaPeriodo() }}: cliente, fecha, hora, servicio,
+          estado y acción para cancelar.
         </caption>
         <thead>
           <tr>
@@ -89,7 +94,9 @@
             </tr>
           } @empty {
             <tr>
-              <td colspan="6" class="empty">No hay reservas registradas.</td>
+              <td colspan="6" class="empty">
+                No hay reservas en este mes.
+              </td>
             </tr>
           }
         </tbody>

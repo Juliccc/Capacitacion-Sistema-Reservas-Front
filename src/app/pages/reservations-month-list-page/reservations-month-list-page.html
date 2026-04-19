@@ -1,0 +1,53 @@
+<div class="page">
+  <header class="page__header">
+    <h1 class="page__title">Reservas</h1>
+    <p class="page__intro">
+      Elegí un mes y año para ver todas las reservas de ese período.
+    </p>
+    <p class="page__nav">
+      <a routerLink="/reservas/nueva" class="page__cta">Nueva reserva</a>
+    </p>
+  </header>
+
+  @if (error(); as err) {
+    <div class="alert" role="alert" aria-live="polite">
+      <span>{{ err }}</span>
+      <button type="button" class="alert__action" (click)="recargar()">
+        Reintentar
+      </button>
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="loading-panel" aria-live="polite" aria-busy="true">
+      <span class="loading-panel__spinner" aria-hidden="true"></span>
+      <span class="loading-panel__text">Cargando meses…</span>
+    </div>
+  } @else if (meses().length === 0) {
+    <div class="empty-card" role="status">
+      <p class="empty-card__text">Todavía no hay reservas registradas.</p>
+      <a routerLink="/reservas/nueva" class="page__cta">Crear la primera reserva</a>
+    </div>
+  } @else {
+    <ul class="month-grid" aria-label="Meses con reservas">
+      @for (m of meses(); track m.year + '-' + m.month) {
+        <li>
+          <a
+            class="month-card"
+            [routerLink]="['/reservas', m.year, m.month]"
+            [attr.aria-label]="
+              'Ver reservas de ' + m.etiqueta + ', ' + m.total + ' reservas'
+            "
+          >
+            <span class="month-card__title">{{ m.etiqueta }}</span>
+            <span class="month-card__meta">
+              {{ m.total }}
+              {{ m.total === 1 ? 'reserva' : 'reservas' }}
+            </span>
+            <span class="month-card__hint">Ver detalle</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</div>
