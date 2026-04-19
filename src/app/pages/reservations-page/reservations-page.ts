@@ -30,6 +30,8 @@ export class ReservationsPage {
   readonly error = signal<string | null>(null);
   readonly cancellingId = signal<number | null>(null);
 
+  protected readonly ReservationStatus = ReservationStatus;
+
   constructor() {
     this.load();
     this.destroyRef.onDestroy(() => this.loadSubscription?.unsubscribe());

@@ -1,1 +1,12 @@
-<router-outlet />
+<div class="app-shell">
+  <header class="app-bar">
+    <a routerLink="/reservas" class="app-bar__brand">Reserva Soporte</a>
+    <nav class="app-bar__nav" aria-label="Principal">
+      <a routerLink="/reservas" class="app-bar__link" routerLinkActive="app-bar__link--active" [routerLinkActiveOptions]="{ exact: true }">Listado</a>
+      <a routerLink="/reservas/nueva" class="app-bar__link" routerLinkActive="app-bar__link--active">Nueva reserva</a>
+    </nav>
+  </header>
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

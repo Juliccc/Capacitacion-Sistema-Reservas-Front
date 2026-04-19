@@ -5,7 +5,7 @@
       Consulta el listado y cancela reservas que sigan activas.
     </p>
     <p class="page__nav">
-      <a routerLink="/reservas/nueva" class="page__link">Crear nueva reserva</a>
+      <a routerLink="/reservas/nueva" class="page__cta">Nueva reserva</a>
     </p>
   </header>
 
@@ -19,7 +19,10 @@
   }
 
   @if (loading()) {
-    <p class="status" aria-live="polite">Cargando reservas…</p>
+    <div class="loading-panel" aria-live="polite" aria-busy="true">
+      <span class="loading-panel__spinner" aria-hidden="true"></span>
+      <span class="loading-panel__text">Cargando reservas…</span>
+    </div>
   } @else {
     <div class="table-wrap" role="region" aria-labelledby="reservas-caption">
       <table class="table">
@@ -45,8 +48,20 @@
               <td>
                 <time [attr.datetime]="reserva.time">{{ reserva.time }}</time>
               </td>
-              <td>{{ reserva.service }}</td>
-              <td>{{ estadoEtiqueta(reserva.status) }}</td>
+              <td class="table__service">{{ reserva.service }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.badge--active]="
+                    reserva.status === ReservationStatus.ACTIVE
+                  "
+                  [class.badge--canceled]="
+                    reserva.status === ReservationStatus.CANCELED
+                  "
+                >
+                  {{ estadoEtiqueta(reserva.status) }}
+                </span>
+              </td>
               <td>
                 @if (puedeCancelar(reserva)) {
                   <button
